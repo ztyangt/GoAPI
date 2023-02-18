@@ -1,0 +1,14 @@
+site:
+  port: "5500"
+  name: "相左API"
+  keywords: "API,相左,golang"
+  description: "相左API，为您提供一个免费可靠稳定接口服务的。"
+  ICP: "黔ICP备19012043号-4"
+
+author:
+  name: "相左"
+  avatar: "https://q.qlogo.cn/g?b=qq&nk=2251513837&s=640"
+  url: "https://www.ztyang.com"
+  QQ: "2251513837"
+  email: "yang2210670@163.com"
+  github: "https://github.com/ztyangt/goAPI"

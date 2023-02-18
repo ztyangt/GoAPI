@@ -6,18 +6,25 @@ import (
 	yaml "gopkg.in/yaml.v3"
 )
 
-var filepath = "conf/config.yaml"
+var filepath = "config/config.yaml"
+
+var SiteInfo = GetConfig()
 
 type author struct {
-	Name string `yaml:"name"`
-	Url  string `yaml:"url"`
-	QQ   string `yaml:"QQ"`
+	Name   string `yaml:"name"`
+	Avatar string `yaml:"avatar"`
+	Url    string `yaml:"url"`
+	QQ     string `yaml:"QQ"`
+	Email  string `yaml:"email"`
+	Github string `yaml:"github"`
 }
 
 type site struct {
 	Port        string `yaml:"port"`
 	Name        string `yaml:"name"`
+	Keywords    string `yaml:"keywords"`
 	Description string `yaml:"description"`
+	ICP         string `yaml:"ICP"`
 }
 
 type Config struct {

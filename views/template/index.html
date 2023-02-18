@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.config.Site.Name}}</title>
+    <meta name="description" content="{{.config.Site.Description}}">
+    <meta name="keywords" content="{{.config.Site.Keywords}}">
+    <link rel="shortcut icon" href="/static/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="//at.alicdn.com/t/c/font_3869259_ybp5hjt2jn.js"></script>
+</head>
+<body>
+<section>
+    <div class="container">
+
+        <div class="card">
+            <div class="content" >
+                <div class="imgBx">
+                    <img src="{{ .config.Author.Avatar }}" alt="{{ .config.Author.Name }}">
+                </div>
+                <div class="contentBx">
+                    <h3>{{ .config.Site.Name }}</h3>
+                    <p>健身达人</p>
+                </div>
+            </div>
+            <ul class="sci">
+                {{ if .config.Author.Url }}
+                <li style="--i:1">
+                    <a href="{{ .config.Author.Url }}" target="_blank">
+                        <svg class="icon" aria-hidden="true"><use xlink:href="#icon-home_click"></use></svg>
+                    </a>
+                </li>
+                {{ end }}
+                {{ if .config.Author.QQ }}
+                <li style="--i:2">
+                    <a href="tencent://message/?uin={{ .config.Author.QQ }}&Site=chaos&Menu=yes">
+                        <svg class="icon" aria-hidden="true"><use xlink:href="#icon-QQ"></use></svg>
+                    </a>
+                </li>
+                {{ end }}
+                {{ if .config.Author.Github }}
+                <li style="--i:3">
+                <a href="{{ .config.Author.Github }}" target="_blank">
+                    <svg class="icon" aria-hidden="true"><use xlink:href="#icon-github"></use></svg>
+                </a>
+                </li>
+                {{ end }}
+                {{ if .config.Author.Email }}
+                <li style="--i:4">
+                <a href="mailto:{{ .config.Author.Email }}">
+                    <svg class="icon" aria-hidden="true"><use xlink:href="#icon-email"></use></svg>
+                </a>
+                </li>
+                {{ end }}
+            </ul>
+        </div>
+
+    </div>
+</section>
+<footer>
+    <div class="copy">Copyright © <span></span>{{.year}}.{{.config.Author.Name}}
+    {{ if .config.Author.Email }} - <a href="https://beian.miit.gov.cn/" target="_blank">{{ .config.Site.ICP }}</a>
+    {{ end }}
+    </div>
+</footer>
+</body>
+</html>

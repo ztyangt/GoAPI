@@ -3,8 +3,10 @@ package main
 import (
 	"GinAPI/common"
 	"GinAPI/router"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/thinkerou/favicon"
 )
 
 func init() {
@@ -14,15 +16,14 @@ func init() {
 }
 
 func main() {
-	// 读取配置文件
-	config := common.GetConfig()
-
 	server := gin.Default()
-	server.LoadHTMLGlob("views/*")
+	server.LoadHTMLGlob("views/template/*")
+	server.StaticFS("static", http.Dir("views/assets"))
+	server.Use(favicon.New("./views/assets/images/favicon.ico"))
 
 	apiGroup := server.Group("api")
 	router.InitAPI(apiGroup)
 
 	server.GET("/", router.Html)
-	server.Run(":" + config.Site.Port)
+	server.Run(":" + common.SiteInfo.Site.Port)
 }
