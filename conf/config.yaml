@@ -1,0 +1,11 @@
+site:
+  port: 5500
+  name: "相左API"
+  description: "念念不忘，必有回响"
+  ICP: 
+  GWbeian:
+
+author:
+  name: "相左"
+  url: "https://www.ztyang.com"
+  QQ: "2251513837"
