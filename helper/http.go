@@ -1,94 +1,57 @@
 package helper
 
 import (
-	"encoding/json"
 	"io"
 	"net/http"
-	URL "net/url"
-	"strings"
+
+	"github.com/spf13/cast"
 )
 
-type apiJson struct {
-	Code int `json:"code"`
-	Data any `json:"data"`
+type CurlResult struct {
+	Data       any
+	Body       string
+	StatusCode int
+	Header     http.Header
+	Err        error
 }
 
-// Gets
-/**
- * 发送GET请求
- * url   : 请求地址
- * query : 请求参数
- * result: 返回结果, err:错误信息
- */
-func Gets(url string, config ...map[string]string) (result apiJson, err error) {
+func GET(url string, params map[string]any, headers map[string]any) (result CurlResult) {
 
-	var data apiJson
+	request, _ := http.NewRequest("GET", url, nil)
 
-	data.Code = 200
-	data.Data = nil
-
-	query := URL.Values{}
-
-	for key, val := range config[0] {
-		query.Add(key, val)
+	if params != nil {
+		query := request.URL.Query()
+		for key, val := range params {
+			query.Add(key, cast.ToString(val))
+		}
+		request.URL.RawQuery = query.Encode()
 	}
 
-	// 转义URL参数
-	params := query.Encode()
-
-	if empty := Is.Empty(params); !empty {
-		params = "?" + params
+	if headers != nil {
+		for key, val := range headers {
+			request.Header.Set(key, cast.ToString(val))
+		}
 	}
 
 	client := &http.Client{}
-	reqest, _ := http.NewRequest("GET", url+params, nil)
-
-	// 添加头信息
-	for key, val := range config[1] {
-		reqest.Header.Set(key, val)
-	}
-
-	// 设置默认的 Content-Type
-	if yes := InMapKey("Content-Type", config[1]); !yes {
-		reqest.Header.Set("Content-Type", "application/json")
-	}
-
-	response, err := client.Do(reqest)
+	response, err := client.Do(request)
 	if err != nil {
-		data.Code = 500
-		return data, err
+		result.Err = err
+		return
 	}
+
+	result.StatusCode = response.StatusCode
+	result.Header = response.Header
+
 	if response.StatusCode == 200 {
-		body, err_ := io.ReadAll(response.Body)
-		if err_ != nil {
-			data.Code = 500
-			return data, err_
+		body, err := io.ReadAll(response.Body)
+		if err != nil {
+			result.Err = err
+			return
 		}
-		data.Data = string(body)
-		// _ = json.Unmarshal(body, &data)
-		return data, nil
+		result.Body = string(body)
+		result.Data = Json.Decode(string(body))
 	}
-	return data, err
-}
 
-func Request(url string, method string, data any) (result any, err error) {
-
-	client := &http.Client{}
-	jsonData, _ := json.Marshal(data)
-	reqest, _ := http.NewRequest(method, url, strings.NewReader(string(jsonData)))
-
-	reqest.Header.Set("Content-Type", "application/json")
-
-	response, err := client.Do(reqest)
-	if err != nil {
-		return "", err
-	}
-	if response.StatusCode == 200 {
-		body, err_ := io.ReadAll(response.Body)
-		if err_ != nil {
-			return "", err_
-		}
-		return JsonDecode(string(body)), nil
-	}
-	return "", err
+	return
 }

@@ -1,8 +1,19 @@
 package service
 
+import (
+	"GinAPI/helper"
+	"fmt"
+)
+
 func GetYiyan() string {
 	// client := resty.New()
-	// resp, err := client.R().Get("https://v1.hitokoto.cn")
+	resp := helper.HTTP.GET("https://v1.hitokoto.cn",nil,nil)
+
+	fmt.Println(resp.StatusCode)
+	fmt.Println(resp.Data)
+	fmt.Println(resp.Body)
+	fmt.Println(resp.Header)
+	fmt.Println(resp.Err)
 
 	// if err != nil {
 	// 	common.Log("app").Warn().Msg(err.Error())

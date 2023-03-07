@@ -12,6 +12,10 @@ func init() {
 	Get.Type = getType
 	In.Array = inArray
 	Array.Filter = arrayFilter
+	Json.Encode = JsonEncode
+	Json.Decode = JsonDecode
+	HTTP.GET = GET
+	Net.Tcping = NetTcping
 }
 
 var Get struct {
@@ -35,4 +39,17 @@ var Is struct {
 
 var Array struct {
 	Filter func(array []string) []string
+}
+
+var Json struct {
+	Encode func(value any) (result string)
+	Decode func(value string) (result any)
+}
+
+var HTTP struct {
+	GET func(url string, params map[string]any, headers map[string]any) (result CurlResult)
+}
+
+var Net struct {
+	Tcping func(host any, opts ...map[string]any) (ok bool, detail []map[string]any)
 }
