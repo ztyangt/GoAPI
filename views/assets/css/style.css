@@ -1,162 +1,164 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins',sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
-body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    background: #161623;
-    min-height: 100vh;
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background: #161623;
+  min-height: 100vh;
 }
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 .icon {
-    width: 1em; height: 1em;
-    vertical-align: -0.15em;
-    fill: currentColor;
-    overflow: hidden;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
 }
 section {
-    width: 95%;
-    max-width: 600px;
+  width: 95%;
+  max-width: 600px;
 }
-section::before{
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(#f00, #f0f);
-    clip-path: circle(30% at right 70%);
+section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(#f00, #f0f);
+  clip-path: circle(30% at right 70%);
 }
 section::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(#2196f3, #e91e63);
-    clip-path: circle(20% at 10% 10%);
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(#2196f3, #e91e63);
+  clip-path: circle(20% at 10% 10%);
 }
 .container {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    margin: 40px 0;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 40px 0;
 }
 .container .card {
-    position: relative;
-    width: 100%;
-    height: 400px;
-    background: rgba(255, 255, 255, 0.05);
-    margin: 20px;
-    box-shadow:  0 15px 35px rgba(0, 0, 0, 0.2);
-    border-radius: 15px;
-    display: flex;
-    opacity: 1;
-    justify-content: center;
-    align-items: center;
-    backdrop-filter: blur(10px);
+  position: relative;
+  width: 100%;
+  height: 400px;
+  background: rgba(255, 255, 255, 0.05);
+  margin: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  display: flex;
+  opacity: 1;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(10px);
 }
 .container .card .content {
-    padding: 0 1rem;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    opacity: 1;
-    transform: translateY(-30px);
-    transition: 0.5;
+  padding: 0 1rem;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  opacity: 1;
+  transform: translateY(-30px);
+  transition: 0.5;
 }
 p {
-    color: #ddd;
-    font-size: .875rem;
-    line-height: 1.5rem;
-    overflow: hidden;
-    word-break: break-all;
-    display: -webkit-box;
-    text-overflow: ellipsis;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+  padding-top: 14px;
+  color: #ddd;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  overflow: hidden;
+  word-break: break-all;
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 .container .card .content .imgBx {
-    position: relative;
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    overflow: hidden;
-    border:  10px solid rgba(0, 0, 0, 0.25);
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 10px solid rgba(0, 0, 0, 0.25);
 }
 .container .card .content .imgBx img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
-.container .card .content  .contentBx h3 {
-    color: #fff;
-    letter-spacing: 2px ;
-    font-weight: 500;
-    font-size: 1.5rem;
-    text-align: center;
-    margin:  20px 0 10px;
-    line-height: 1.1em;
+.container .card .content .contentBx h3 {
+  color: #fff;
+  letter-spacing: 2px;
+  font-weight: 500;
+  font-size: 1.5rem;
+  text-align: center;
+  margin: 20px 0 10px;
+  line-height: 1.1em;
 }
 .contentBx {
-    text-align: center;
+  text-align: center;
 }
-.container .card .content  .contentBx h3 span {
-    font-size: 12px;
-    font-weight: 300;
-    text-transform: initial;
+.container .card .content .contentBx h3 span {
+  font-size: 12px;
+  font-weight: 300;
+  text-transform: initial;
 }
 .container .card .sci {
-    position: absolute;
-    bottom: 50px;
-    display: flex;
+  position: absolute;
+  bottom: 50px;
+  display: flex;
 }
 .container .card .sci li {
-    list-style: none;
-    visibility: hidden;
-    margin: 0 10px;
-    transform: translateY(40px);
-    transition: 0.5s;
-    opacity: 0;
-    transition-delay: calc(0.1s * var(--i));
+  list-style: none;
+  visibility: hidden;
+  margin: 0 10px;
+  transform: translateY(40px);
+  transition: 0.5s;
+  opacity: 0;
+  transition-delay: calc(0.1s * var(--i));
 }
 .container .card:hover .sci li {
-    transform: translateY(0px);
-    opacity: 1;
-    visibility: visible;
+  transform: translateY(0px);
+  opacity: 1;
+  visibility: visible;
 }
 .container .card .sci li a {
-    color: #fff;
-    font-size: 24px;
+  color: #fff;
+  font-size: 24px;
 }
 
 footer {
-    position: fixed;
-    bottom: .5rem;
-    left: 0;
-    right: 0;
-    width: 100%;
-    text-align: center;
-    color: #65656e;
-    font-size: .8rem;
+  position: fixed;
+  bottom: 0.5rem;
+  left: 0;
+  right: 0;
+  width: 100%;
+  text-align: center;
+  color: #65656e;
+  font-size: 0.8rem;
 }
 a {
-    color: #65656e;
+  color: #65656e;
 }

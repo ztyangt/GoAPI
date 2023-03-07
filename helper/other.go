@@ -1,6 +1,7 @@
 package helper
 
 import (
+	"encoding/json"
 	"fmt"
 	"reflect"
 	"regexp"
@@ -199,4 +200,10 @@ func InMapValue(value any, array map[string]string) bool {
 		}
 	}
 	return false
+}
+
+func JsonDecode(data string) any {
+	var result map[string]any
+	json.Unmarshal([]byte(data), &result)
+	return result
 }

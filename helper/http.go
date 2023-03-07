@@ -9,9 +9,8 @@ import (
 )
 
 type apiJson struct {
-	Code int    `json:"code"`
-	Msg  string `json:"msg"`
-	Data any    `json:"data"`
+	Code int `json:"code"`
+	Data any `json:"data"`
 }
 
 // Gets
@@ -25,8 +24,7 @@ func Gets(url string, config ...map[string]string) (result apiJson, err error) {
 
 	var data apiJson
 
-	data.Code = 500
-	data.Msg = "服务器错误"
+	data.Code = 200
 	data.Data = nil
 
 	query := URL.Values{}
@@ -66,7 +64,8 @@ func Gets(url string, config ...map[string]string) (result apiJson, err error) {
 			data.Code = 500
 			return data, err_
 		}
-		_ = json.Unmarshal(body, &data)
+		data.Data = string(body)
+		// _ = json.Unmarshal(body, &data)
 		return data, nil
 	}
 	return data, err
@@ -89,13 +88,7 @@ func Request(url string, method string, data any) (result any, err error) {
 		if err_ != nil {
 			return "", err_
 		}
-		return jsonDecode(string(body)), nil
+		return JsonDecode(string(body)), nil
 	}
 	return "", err
-}
-
-func jsonDecode(data string) any {
-	var result map[string]any
-	json.Unmarshal([]byte(data), &result)
-	return result
 }
