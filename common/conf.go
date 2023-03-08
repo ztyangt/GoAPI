@@ -6,7 +6,7 @@ import (
 	yaml "gopkg.in/yaml.v3"
 )
 
-var filepath = "config/config.yaml"
+var filepath = "../config.yaml"
 
 var SiteInfo = GetConfig()
 
