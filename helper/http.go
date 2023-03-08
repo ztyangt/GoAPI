@@ -1,7 +1,6 @@
 package helper
 
 import (
-	"fmt"
 	"io"
 	"net/http"
 	"strings"
@@ -22,7 +21,6 @@ func CurlFunc(url string, method string, params map[string]any, headers map[stri
 
 	client := &http.Client{}
 	body, _ := json.Marshal(params)
-	fmt.Println(strings.NewReader(string(body)))
 	request, _ := http.NewRequest(method, url, strings.NewReader(string(body)))
 
 	if headers != nil {
