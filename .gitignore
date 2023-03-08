@@ -6,6 +6,9 @@
 *.dylib
 app.log
 
+GinAPI
+GinAPI.exe
+
 # Test binary, built with `go test -c`
 *.test
 
@@ -15,4 +18,7 @@ app.log
 # Dependency directories (remove the comment below to include it)
 # vendor/
 tmp/
+.vscode/
+.idea
+
 
