@@ -15,6 +15,7 @@ func init() {
 	Json.Encode = JsonEncode
 	Json.Decode = JsonDecode
 	HTTP.GET = GET
+	HTTP.POST = POST
 	Net.Tcping = NetTcping
 }
 
@@ -47,7 +48,8 @@ var Json struct {
 }
 
 var HTTP struct {
-	GET func(url string, params map[string]any, headers map[string]any) (result CurlResult)
+	GET  func(url string, params map[string]any, headers map[string]any) (result CurlResult)
+	POST func(url string, params map[string]any, headers map[string]any) (result CurlResult)
 }
 
 var Net struct {

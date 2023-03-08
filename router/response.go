@@ -31,3 +31,12 @@ func getDeveloper() developer {
 		Time:   timeStr,
 	}
 }
+
+func returnData(code int, result any, msg string) Response {
+	return Response {
+		Code:      code,
+    Data:      result,
+    Msg:       msg,
+    Developer: getDeveloper(),
+	}
+}
