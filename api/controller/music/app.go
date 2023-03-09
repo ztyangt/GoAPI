@@ -1,4 +1,4 @@
-package service
+package music
 
 func GetList(id string, server string) string {
 	switch server {

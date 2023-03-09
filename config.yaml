@@ -1,4 +1,5 @@
 site:
+  url: https://github.com/ztyangt/goAPI
   port: "5500"
   name: "相左API"
   keywords: "API,相左,golang"

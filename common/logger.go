@@ -10,8 +10,17 @@ import (
 var loggers = make(map[string]zerolog.Logger)
 
 func InitLog(names ...string) {
+
+	_, err := os.Stat("logs")
+	if err != nil {
+		if os.IsNotExist(err) {
+			// 创建文件夹
+			os.MkdirAll("logs", os.ModePerm)
+		}
+	}
+
 	for _, name := range names {
-		openFile, err := os.OpenFile(fmt.Sprintf("./logs/%s.log", name), os.O_CREATE|os.O_APPEND|os.O_WRONLY, os.ModeAppend|os.ModePerm)
+		openFile, err := os.OpenFile(fmt.Sprintf("logs/%s.log", name), os.O_CREATE|os.O_APPEND|os.O_WRONLY, os.ModeAppend|os.ModePerm)
 		if err != nil {
 			fmt.Printf("open log file err: %v\n", err)
 			return

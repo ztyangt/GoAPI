@@ -1,12 +1,12 @@
-package service
+package other
 
 import (
-	"GinAPI/helper"
+	"GoAPI/helper"
 )
 
 func GetYiyan() string {
 	// client := resty.New()
-	resp := helper.HTTP.GET("https://v1.hitokoto.cn",nil,nil)
+	resp := helper.HTTP.GET("https://v1.hitokoto.cn", nil, nil)
 
 	// fmt.Println(resp.StatusCode)
 	// fmt.Println(resp.Data)

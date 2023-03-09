@@ -1,8 +1,8 @@
 package main
 
 import (
-	"GinAPI/common"
-	"GinAPI/router"
+	"GoAPI/api/app"
+	"GoAPI/common"
 
 	"github.com/gin-gonic/gin"
 )
@@ -14,14 +14,14 @@ func init() {
 	// fmt.Println(data)
 	// fmt.Println("-------------------结束------------------------")
 
-
 	// 开启日志
 	common.InitLog("app", "gin")
 	common.Log("app").Info().Msg("app start")
 }
 
 func main() {
+	// gin.SetMode(gin.ReleaseMode) //生产环境模式
 	server := gin.Default()
-	router.InitServer(server)
+	app.InitServer(server)
 	server.Run(":" + common.SiteInfo.Site.Port)
 }

@@ -1,7 +1,7 @@
-package router
+package app
 
 import (
-	"GinAPI/common"
+	"GoAPI/common"
 	"time"
 )
 
@@ -33,10 +33,10 @@ func getDeveloper() developer {
 }
 
 func returnData(code int, result any, msg string) Response {
-	return Response {
+	return Response{
 		Code:      code,
-    Data:      result,
-    Msg:       msg,
-    Developer: getDeveloper(),
+		Data:      result,
+		Msg:       msg,
+		Developer: getDeveloper(),
 	}
 }

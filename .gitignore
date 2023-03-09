@@ -1,3 +1,4 @@
+
 # Binaries for programs and plugins
 *.exe
 *.exe~
@@ -5,9 +6,12 @@
 *.so
 *.dylib
 app.log
+.vscode
+.idea/*
 
-GinAPI
-GinAPI.exe
+
+GoAPI
+GoAPI.exe
 
 # Test binary, built with `go test -c`
 *.test
@@ -18,7 +22,6 @@ GinAPI.exe
 # Dependency directories (remove the comment below to include it)
 # vendor/
 tmp/
-.vscode/
-.idea
+
 
 

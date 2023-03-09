@@ -1,7 +1,7 @@
-package service
+package music
 
 import (
-	"GinAPI/helper"
+	"GoAPI/helper"
 	"fmt"
 	"reflect"
 
@@ -43,16 +43,15 @@ type Url struct {
 
 type Comment struct {
 	CommentId string `json:"comment_id"`
-	UserId string `json:"user_id"`
-	Nickname string `json:"nickname"`
+	UserId    string `json:"user_id"`
+	Nickname  string `json:"nickname"`
 	AvatarUrl string `json:"avatar_url"`
-	Content string 	`json:"content"`
-	Time string 	`json:"time"`
-	TimeStr string 	`json:"time_str"`
-	Ip string 	`json:"ip"`
-	Location string 	`json:"location"`
+	Content   string `json:"content"`
+	Time      string `json:"time"`
+	TimeStr   string `json:"time_str"`
+	Ip        string `json:"ip"`
+	Location  string `json:"location"`
 }
-
 
 func df_song() string {
 	return helper.Json.Encode(Song{
@@ -66,12 +65,11 @@ func df_song() string {
 	})
 }
 
-
 func FormatList(data string) string {
 
 	list := gjson.Get(data, "playlist.tracks")
 	exist := list.Exists()
-	
+
 	if exist {
 
 		var play_list = []Song{}
@@ -82,11 +80,11 @@ func FormatList(data string) string {
 		avatar_url := gjson.Get(data, "playlist.creator.avatarUrl").String()
 
 		creator := Creator{
-      UserId: user_id,
-      Nickname: nickname,
-      Signature: signature,
-      AvatarUrl: avatar_url,
-    }
+			UserId:    user_id,
+			Nickname:  nickname,
+			Signature: signature,
+			AvatarUrl: avatar_url,
+		}
 
 		id := gjson.Get(data, "playlist.id").String()
 		name := gjson.Get(data, "playlist.name").String()
@@ -100,35 +98,35 @@ func FormatList(data string) string {
 
 			artist_str := value.Get("ar")
 			artist_str.ForEach(func(index, item gjson.Result) bool {
-				artist = append(artist,item.Get("name").String())
-				return true 
+				artist = append(artist, item.Get("name").String())
+				return true
 			})
 
 			id := value.Get("id").String()
 
 			song := Song{
-				Id:     id,
-        Name:    value.Get("name").String(),
-        Artist:  artist,
-        Album:   value.Get("al.name").String(),
-        PicUrl:  value.Get("al.picUrl").String(),
-        UrlId:   id,
-        LyricId: id,
+				Id:      id,
+				Name:    value.Get("name").String(),
+				Artist:  artist,
+				Album:   value.Get("al.name").String(),
+				PicUrl:  value.Get("al.picUrl").String(),
+				UrlId:   id,
+				LyricId: id,
 			}
 
-			play_list = append(play_list,song)
-			return true 
+			play_list = append(play_list, song)
+			return true
 		})
 
 		return helper.Json.Encode(List{
-				Creator: creator,
-        Id:      id,
-        Name:    name,
-        Description: description,
-        CoverUrl: cover_url,
-        PlayList: play_list,
-			})
-	}else{
+			Creator:     creator,
+			Id:          id,
+			Name:        name,
+			Description: description,
+			CoverUrl:    cover_url,
+			PlayList:    play_list,
+		})
+	} else {
 		return "{}"
 	}
 }
@@ -136,7 +134,7 @@ func FormatList(data string) string {
 func FormatSong(data string) string {
 
 	exist := gjson.Get(data, "songs").Exists()
-	
+
 	if exist {
 		var artist = []string{}
 		id := gjson.Get(data, "songs.0.id").String()
@@ -144,8 +142,8 @@ func FormatSong(data string) string {
 
 		artist_str := gjson.Get(data, "songs.0.ar")
 		artist_str.ForEach(func(index, value gjson.Result) bool {
-			artist = append(artist,gjson.Get(value.String(), "name").String())
-			return true 
+			artist = append(artist, gjson.Get(value.String(), "name").String())
+			return true
 		})
 
 		album := gjson.Get(data, "songs.0.al.name").String()
@@ -153,20 +151,20 @@ func FormatSong(data string) string {
 
 		return helper.Json.Encode(Song{
 			Id:      id,
-      Name:    name,
-      Artist:  artist,
-      Album:   album,
-      PicUrl:   pic_str,
-      UrlId:   id,
-      LyricId: id,
+			Name:    name,
+			Artist:  artist,
+			Album:   album,
+			PicUrl:  pic_str,
+			UrlId:   id,
+			LyricId: id,
 		})
-	}else{
+	} else {
 		return "{}"
 	}
 }
 
 func FormatUrl(data string) string {
-	
+
 	exist := gjson.Get(data, "data.0").Exists()
 
 	if exist {
@@ -176,13 +174,13 @@ func FormatUrl(data string) string {
 		duration := gjson.Get(data, "data.0.time").Int()
 
 		return helper.Json.Encode(Url{
-			Id:      id,
-      Size:    size,
-      Url:  		url,
-      Duration:   duration,
+			Id:       id,
+			Size:     size,
+			Url:      url,
+			Duration: duration,
 		})
 
-	}else{
+	} else {
 		return "{}"
 	}
 }
@@ -191,12 +189,12 @@ func FormatMV(data string) string {
 	exist := gjson.Get(data, "data.id").Exists()
 	if exist {
 		return gjson.Get(data, "data").String()
-	}else{
+	} else {
 		return "{}"
 	}
 }
 
-func FormatComments(data string,ctype string) string {
+func FormatComments(data string, ctype string) string {
 
 	var exist bool
 	var comments_str gjson.Result
@@ -204,7 +202,7 @@ func FormatComments(data string,ctype string) string {
 	if ctype == "1" {
 		comments_str = gjson.Get(data, "hotComments")
 		exist = gjson.Get(data, "hotComments.0").Exists()
-	}else{
+	} else {
 		comments_str = gjson.Get(data, "comments")
 		exist = gjson.Get(data, "comments.0").Exists()
 	}
@@ -214,23 +212,23 @@ func FormatComments(data string,ctype string) string {
 
 		fmt.Println(reflect.TypeOf(comments_str))
 
-    comments_str.ForEach(func(index, value gjson.Result) bool {
-      comments = append(comments,Comment{
+		comments_str.ForEach(func(index, value gjson.Result) bool {
+			comments = append(comments, Comment{
 				CommentId: value.Get("commentId").String(),
-				UserId:   value.Get("user.userId").String(),
-        Nickname: value.Get("user.nickname").String(),
-        AvatarUrl: value.Get("user.avatarUrl").String(),
-        Content: value.Get("content").String(),
-        Time: value.Get("time").String(),
-        TimeStr: value.Get("timeStr").String(),
-        Ip: value.Get("ipLocation.ip").String(),
-        Location: value.Get("ipLocation.location").String(),
+				UserId:    value.Get("user.userId").String(),
+				Nickname:  value.Get("user.nickname").String(),
+				AvatarUrl: value.Get("user.avatarUrl").String(),
+				Content:   value.Get("content").String(),
+				Time:      value.Get("time").String(),
+				TimeStr:   value.Get("timeStr").String(),
+				Ip:        value.Get("ipLocation.ip").String(),
+				Location:  value.Get("ipLocation.location").String(),
 			})
-      return true 
-    })
+			return true
+		})
 
 		return helper.Json.Encode(comments)
-	}else{
+	} else {
 		return "[]"
 	}
 }
@@ -239,7 +237,7 @@ func FormatLyric(data string) string {
 	exist := gjson.Get(data, "lrc").Exists()
 	if exist {
 		return data
-	}else{
+	} else {
 		return "{}"
 	}
 }
@@ -252,51 +250,51 @@ func FormatSearch(data string, type_ string) string {
 
 	exist := gjson.Get(data, "result").Exists()
 	if exist {
-		
+
 		switch type_ {
-			case "10":
-				return gjson.Get(data, "result.albums").String()
-			case "100":
-				return gjson.Get(data, "result.artists").String()
-			case "1000":
-				return gjson.Get(data, "result.playlists").String()
-			case "1004":
-				return gjson.Get(data, "result.mvs").String()
-			case "1006":
-				return gjson.Get(data, "result.songs").String()
-			case "1009":
-				return gjson.Get(data, "result.djRadios").String()
-			default: 
-				var search_result = []Song{}
-				search_list_str := gjson.Get(data, "result.songs")
-				search_list_str.ForEach(func(index, value gjson.Result) bool {
+		case "10":
+			return gjson.Get(data, "result.albums").String()
+		case "100":
+			return gjson.Get(data, "result.artists").String()
+		case "1000":
+			return gjson.Get(data, "result.playlists").String()
+		case "1004":
+			return gjson.Get(data, "result.mvs").String()
+		case "1006":
+			return gjson.Get(data, "result.songs").String()
+		case "1009":
+			return gjson.Get(data, "result.djRadios").String()
+		default:
+			var search_result = []Song{}
+			search_list_str := gjson.Get(data, "result.songs")
+			search_list_str.ForEach(func(index, value gjson.Result) bool {
 
-					var artist = []string{}
-		
-					artist_str := value.Get("ar")
-					artist_str.ForEach(func(index, item gjson.Result) bool {
-						artist = append(artist,item.Get("name").String())
-						return true 
-					})
-		
-					id := value.Get("id").String()
-		
-					song := Song{
-						Id:      id,
-						Name:    value.Get("name").String(),
-						Artist:  artist,
-						Album:   value.Get("al.name").String(),
-						PicUrl:  value.Get("al.PicUrl").String(),
-						UrlId:   id,
-						LyricId: id,
-					}
-					search_result = append(search_result,song)
-					return true 
+				var artist = []string{}
+
+				artist_str := value.Get("ar")
+				artist_str.ForEach(func(index, item gjson.Result) bool {
+					artist = append(artist, item.Get("name").String())
+					return true
 				})
-				return helper.Json.Encode(search_result)
-			}
 
-	}else{
+				id := value.Get("id").String()
+
+				song := Song{
+					Id:      id,
+					Name:    value.Get("name").String(),
+					Artist:  artist,
+					Album:   value.Get("al.name").String(),
+					PicUrl:  value.Get("al.PicUrl").String(),
+					UrlId:   id,
+					LyricId: id,
+				}
+				search_result = append(search_result, song)
+				return true
+			})
+			return helper.Json.Encode(search_result)
+		}
+
+	} else {
 		return "[]"
 	}
 }
