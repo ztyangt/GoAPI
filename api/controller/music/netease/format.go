@@ -1,4 +1,4 @@
-package music
+package netease
 
 import (
 	"GoAPI/helper"
@@ -32,6 +32,7 @@ type Song struct {
 	PicUrl  string `json:"pic_url"`
 	UrlId   string `json:"url_id"`
 	LyricId string `json:"lyric_id"`
+	Source  string `json:"source"`
 }
 
 type Url struct {
@@ -62,6 +63,7 @@ func df_song() string {
 		PicUrl:  "",
 		UrlId:   "",
 		LyricId: "",
+		Source:  "",
 	})
 }
 

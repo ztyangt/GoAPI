@@ -1,10 +1,10 @@
 site:
-  url: https://github.com/ztyangt/goAPI
-  port: "5500"
+  url: "https://www.apifox.cn/apidoc/shared-6bc426e5-0c00-4405-8a9f-4773a1e0b26d/"
+  port: "8899"
   name: "相左API"
   keywords: "API,相左,golang"
   description: "相左API，为您提供一个免费可靠稳定的接口服务。"
-  ICP: "黔ICP备19012043号-4"
+  ICP: "黔ICP备19012043号-9"
 
 author:
   name: "相左"
@@ -12,4 +12,4 @@ author:
   url: "https://www.ztyang.com"
   QQ: "2251513837"
   email: "yang2210670@163.com"
-  github: "https://github.com/ztyangt/"
+  github: "https://github.com/ztyangt/goAPI"

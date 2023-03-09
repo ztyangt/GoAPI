@@ -1,7 +1,7 @@
 package app
 
 import (
-	"GoAPI/api/controller/music"
+	"GoAPI/api/controller/music/netease"
 	"GoAPI/api/controller/word"
 	"GoAPI/common"
 	"GoAPI/helper"
@@ -18,22 +18,22 @@ func MusicFunc(ctx *gin.Context) {
 
 	case "song":
 		{
-			data := music.GetSong(id, server)
+			data := netease.GetSong(id, server)
 			ctx.JSON(http.StatusOK, returnData(200, helper.Json.Decode(data), "请求成功"))
 		}
 	case "url":
 		{
-			data := music.GetUrl(id, server)
+			data := netease.GetUrl(id, server)
 			ctx.JSON(http.StatusOK, returnData(200, helper.Json.Decode(data), "请求成功"))
 		}
 	case "playlist":
 		{
-			data := music.GetList(id, server)
+			data := netease.GetList(id, server)
 			ctx.JSON(http.StatusOK, returnData(200, helper.Json.Decode(data), "请求成功"))
 		}
 	case "mv":
 		{
-			data := music.GetMV(id, server)
+			data := netease.GetMV(id, server)
 			ctx.JSON(http.StatusBadRequest, returnData(200, helper.Json.Decode(data), "请求成功"))
 		}
 	case "comments":
@@ -41,17 +41,17 @@ func MusicFunc(ctx *gin.Context) {
 			limit, _ := ctx.GetQuery("limit")
 			offset, _ := ctx.GetQuery("offset")
 			ctype, _ := ctx.GetQuery("ctype")
-			data := music.GetComments(id, limit, offset, ctype, server)
+			data := netease.GetComments(id, limit, offset, ctype, server)
 			ctx.JSON(http.StatusOK, returnData(200, helper.Json.Decode(data), "请求成功"))
 		}
 	case "lyric":
 		{
-			data := music.GetLyric(id, server)
+			data := netease.GetLyric(id, server)
 			ctx.JSON(http.StatusOK, returnData(200, helper.Json.Decode(data), "请求成功"))
 		}
 	case "user":
 		{
-			data := music.GetUser(id, server)
+			data := netease.GetUser(id, server)
 			ctx.JSON(http.StatusOK, returnData(200, helper.Json.Decode(data), "请求成功"))
 		}
 	case "search":
@@ -60,7 +60,7 @@ func MusicFunc(ctx *gin.Context) {
 			type_, _ := ctx.GetQuery("type")
 			offset, _ := ctx.GetQuery("offset")
 			limit, _ := ctx.GetQuery("limit")
-			data := music.Search(s, type_, offset, limit, server)
+			data := netease.Search(s, type_, offset, limit, server)
 			ctx.JSON(http.StatusOK, returnData(200, helper.Json.Decode(data), "请求成功"))
 		}
 	default:
