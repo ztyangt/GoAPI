@@ -17,6 +17,15 @@ func init() {
 	HTTP.GET = GET
 	HTTP.POST = POST
 	Net.Tcping = NetTcping
+	Struct.Set = StructSet
+	Struct.Get = StructGet
+	Struct.Del = StructDel
+	Struct.Has = StructHas
+	Struct.Keys = StructKeys
+	Struct.Values = StructValues
+	Struct.Len = StructLen
+	Struct.Map = StructMap
+	Struct.Slice = StructSlice
 }
 
 var Get struct {
@@ -54,4 +63,16 @@ var HTTP struct {
 
 var Net struct {
 	Tcping func(host any, opts ...map[string]any) (ok bool, detail []map[string]any)
+}
+
+var Struct struct {
+	Set    func(obj any, key string, val any)
+	Get    func(obj any, key string) (result any)
+	Del    func(obj any, key string)
+	Has    func(obj any, key string) (ok bool)
+	Keys   func(obj any) (slice []string)
+	Values func(obj any) (slice []any)
+	Len    func(obj any) (length int)
+	Map    func(obj any) (result map[string]any)
+	Slice  func(obj any) (slice []any)
 }

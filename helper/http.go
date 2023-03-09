@@ -94,4 +94,3 @@ func GET(url string, params map[string]any, headers map[string]any) (result Curl
 func POST(url string, params map[string]any, headers map[string]any) (result CurlResult) {
 	return CurlFunc(url, "POST", params, headers)
 }
-

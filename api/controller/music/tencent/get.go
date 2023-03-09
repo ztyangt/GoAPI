@@ -1,4 +1,4 @@
-package netease
+package tencent
 
 import (
 	"GoAPI/common"
@@ -12,31 +12,22 @@ func musicGET(url string, params map[string]any) (result helper.CurlResult) {
 
 	var headers = make(map[string]any)
 
-	headers["Referer"] = "https://music.163.com/"
-	headers["cookie"] = "appver=8.2.30; os=iPhone OS; osver=15.0; EVNSM=1.0.0; buildver=2206; channel=distribution; machineid=iPhone13.3"
-	headers["User-Agent"] = "Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 CloudMusic/0.1.1 NeteaseMusic/8.2.30"
+	headers["Referer"] = "http://y.qq.com"
+	headers["cookie"] = "pgv_pvi=22038528; pgv_si=s3156287488; pgv_pvid=5535248600; yplayer_open=1; ts_last=y.qq.com/portal/player.html; ts_uid=4847550686; yq_index=0; qqmusic_fromtag=66; player_exist=1"
+	headers["User-Agent"] = "QQ%E9%9F%B3%E4%B9%90/54409 CFNetwork/901.1 Darwin/17.6.0 (x86_64)"
+	headers["Host"] = "c.y.qq.com"
 
 	return helper.HTTP.GET(url, params, headers)
 }
 
 func MusicFunc(ctx *gin.Context) {
 	id, _ := ctx.GetQuery("id")
-
 	type_ := ctx.Param("type")
 	switch type_ {
 
 	case "song":
 		{
 			data := GetSong(id)
-			ctx.JSON(http.StatusOK, common.ReturnData(200, helper.Json.Decode(data), "请求成功"))
-		}
-	case "search":
-		{
-			s, _ := ctx.GetQuery("s")
-			type_, _ := ctx.GetQuery("type")
-			offset, _ := ctx.GetQuery("offset")
-			limit, _ := ctx.GetQuery("limit")
-			data := Search(s, type_, offset, limit)
 			ctx.JSON(http.StatusOK, common.ReturnData(200, helper.Json.Decode(data), "请求成功"))
 		}
 	case "url":
@@ -71,11 +62,11 @@ func MusicFunc(ctx *gin.Context) {
 			ctx.JSON(http.StatusBadRequest, common.ReturnData(200, helper.Json.Decode(data), "请求成功"))
 		}
 
-	case "user":
-		{
-			data := GetUser(id)
-			ctx.JSON(http.StatusOK, common.ReturnData(200, helper.Json.Decode(data), "请求成功"))
-		}
+	// case "user":
+	// 	{
+	// 		data := GetUser(id)
+	// 		ctx.JSON(http.StatusOK, common.ReturnData(200, helper.Json.Decode(data), "请求成功"))
+	// 	}
 	default:
 		{
 			ctx.JSON(http.StatusOK, common.ReturnData(400, nil, "未知的请求方式"))
