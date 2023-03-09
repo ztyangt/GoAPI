@@ -1,7 +1,6 @@
-package app
+package common
 
 import (
-	"GoAPI/common"
 	"time"
 )
 
@@ -20,9 +19,9 @@ type Response struct {
 	Developer developer `json:"developer"`
 }
 
-func getDeveloper() developer {
+func GetDeveloper() developer {
 	timeStr := time.Now().Format("2006-01-02 15:04:05")
-	config := common.SiteInfo.Author
+	config := SiteInfo.Author
 	return developer{
 		Author: config.Name,
 		Home:   config.Url,
@@ -32,11 +31,11 @@ func getDeveloper() developer {
 	}
 }
 
-func returnData(code int, result any, msg string) Response {
+func ReturnData(code int, result any, msg string) Response {
 	return Response{
 		Code:      code,
 		Data:      result,
 		Msg:       msg,
-		Developer: getDeveloper(),
+		Developer: GetDeveloper(),
 	}
 }
