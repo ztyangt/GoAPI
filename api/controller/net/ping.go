@@ -1,4 +1,4 @@
-package other
+package net
 
 import (
 	"GoAPI/helper"
@@ -10,6 +10,5 @@ func TcpPing() any {
 
 	fmt.Println(resp)
 	fmt.Println(err)
-
 	return resp
 }

@@ -9,9 +9,17 @@ app.log
 .vscode
 .idea/*
 
+node_modules
+node_modules
+.DS_Store
+dist
+dist-ssr
+*.local
 
 GoAPI
 GoAPI.exe
+
+logs
 
 # Test binary, built with `go test -c`
 *.test

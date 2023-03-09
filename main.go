@@ -1,8 +1,8 @@
 package main
 
 import (
-	"GoAPI/api/app"
 	"GoAPI/common"
+	"GoAPI/route"
 
 	"github.com/gin-gonic/gin"
 )
@@ -22,6 +22,6 @@ func init() {
 func main() {
 	// gin.SetMode(gin.ReleaseMode) //生产环境模式
 	server := gin.Default()
-	app.InitServer(server)
+	route.InitServer(server)
 	server.Run(":" + common.SiteInfo.Site.Port)
 }

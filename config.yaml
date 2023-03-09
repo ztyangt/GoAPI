@@ -3,7 +3,7 @@ site:
   port: "5500"
   name: "相左API"
   keywords: "API,相左,golang"
-  description: "相左API，为您提供一个免费可靠稳定接口服务的。"
+  description: "相左API，为您提供一个免费可靠稳定的接口服务。"
   ICP: "黔ICP备19012043号-4"
 
 author:

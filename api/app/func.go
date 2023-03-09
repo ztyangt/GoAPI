@@ -2,7 +2,7 @@ package app
 
 import (
 	"GoAPI/api/controller/music"
-	"GoAPI/api/controller/other"
+	"GoAPI/api/controller/word"
 	"GoAPI/common"
 	"GoAPI/helper"
 	"net/http"
@@ -75,6 +75,6 @@ func SiteFunc(ctx *gin.Context) {
 }
 
 func YiyanFunc(ctx *gin.Context) {
-	yiyan := other.GetYiyan()
+	yiyan := word.GetYiyan()
 	ctx.JSON(http.StatusOK, Response{200, helper.Json.Decode(yiyan).(map[string]interface{})["hitokoto"], "请求成功", getDeveloper()})
 }
