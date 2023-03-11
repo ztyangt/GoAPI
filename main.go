@@ -24,4 +24,5 @@ func main() {
 	}))
 	route.InitServer(server)
 	server.Run(":" + common.SiteInfo.Site.Port)
+
 }

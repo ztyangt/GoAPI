@@ -5,10 +5,8 @@ import (
 )
 
 func InitAPI(api *gin.RouterGroup) {
-
-	
-
 	SiteAPI(api)
 	MusicAPI(api)
+	VideoAPI(api)
 	WordAPI(api)
 }

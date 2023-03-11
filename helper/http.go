@@ -68,7 +68,11 @@ func GET(url string, params map[string]any, headers map[string]any) (result Curl
 		}
 	}
 
-	client := &http.Client{}
+	client := &http.Client{
+		CheckRedirect: func(req *http.Request, via []*http.Request) error {
+			return http.ErrUseLastResponse
+		},
+	}
 	response, err := client.Do(request)
 	if err != nil {
 		result.Err = err
