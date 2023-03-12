@@ -44,10 +44,15 @@ func format_douyin(data string) common.Response {
 			// return common.ReturnData(200, helper.Json.Decode(data), "请求成功")
 		} else {
 
+			play_url := "https://aweme.snssdk.com/aweme/v1/play/?video_id=" + gjson.Get(data, "aweme_detail.video.play_addr.uri").String() + "&ratio=1080p&line=0"
+			redict_data := DouyinGET(play_url, nil)
+
+			url := redict_data.Header.Get("Location")
+
 			video := common.DouyinVideo{
 				Duration:    int(gjson.Get(data, "aweme_detail.video.duration").Int()),
 				Cover:       gjson.Get(data, "aweme_detail.video.dynamic_cover.url_list.0").String(),
-				PlayUrl:     "https://aweme.snssdk.com/aweme/v1/play/?video_id=" + gjson.Get(data, "aweme_detail.video.play_addr.uri").String() + "&ratio=1080p&line=0",
+				PlayUrl:     url,
 				Description: gjson.Get(data, "aweme_detail.preview_title").String(),
 			}
 
