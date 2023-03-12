@@ -21,14 +21,13 @@ func musicGET(url string, params map[string]any) (result helper.CurlResult) {
 
 func MusicFunc(ctx *gin.Context) {
 	id, _ := ctx.GetQuery("id")
-
 	type_ := ctx.Param("type")
+
 	switch type_ {
 
 	case "song":
 		{
-			data := GetSong(id)
-			ctx.JSON(http.StatusOK, common.ReturnData(200, helper.Json.Decode(data), "请求成功"))
+			ctx.JSON(http.StatusOK, GetSong(id))
 		}
 	case "search":
 		{
@@ -36,13 +35,11 @@ func MusicFunc(ctx *gin.Context) {
 			type_, _ := ctx.GetQuery("type")
 			offset, _ := ctx.GetQuery("offset")
 			limit, _ := ctx.GetQuery("limit")
-			data := Search(s, type_, offset, limit)
-			ctx.JSON(http.StatusOK, common.ReturnData(200, helper.Json.Decode(data), "请求成功"))
+			ctx.JSON(http.StatusOK, Search(s, type_, offset, limit))
 		}
 	case "url":
 		{
-			data := GetUrl(id)
-			ctx.JSON(http.StatusOK, common.ReturnData(200, helper.Json.Decode(data), "请求成功"))
+			ctx.JSON(http.StatusOK, GetUrl(id))
 		}
 
 	case "comments":
@@ -51,30 +48,30 @@ func MusicFunc(ctx *gin.Context) {
 			offset, _ := ctx.GetQuery("offset")
 			ctype, _ := ctx.GetQuery("ctype")
 			data := GetComments(id, limit, offset, ctype)
-			ctx.JSON(http.StatusOK, common.ReturnData(200, helper.Json.Decode(data), "请求成功"))
+			ctx.JSON(http.StatusOK, data)
 		}
 
 	case "lyric":
 		{
 			data := GetLyric(id)
-			ctx.JSON(http.StatusOK, common.ReturnData(200, helper.Json.Decode(data), "请求成功"))
+			ctx.JSON(http.StatusOK, data)
 		}
 
 	case "playlist":
 		{
 			data := GetList(id)
-			ctx.JSON(http.StatusOK, common.ReturnData(200, helper.Json.Decode(data), "请求成功"))
+			ctx.JSON(http.StatusOK, data)
 		}
 	case "mv":
 		{
 			data := GetMV(id)
-			ctx.JSON(http.StatusBadRequest, common.ReturnData(200, helper.Json.Decode(data), "请求成功"))
+			ctx.JSON(http.StatusBadRequest, data)
 		}
 
 	case "user":
 		{
 			data := GetUser(id)
-			ctx.JSON(http.StatusOK, common.ReturnData(200, helper.Json.Decode(data), "请求成功"))
+			ctx.JSON(http.StatusOK, data)
 		}
 	default:
 		{

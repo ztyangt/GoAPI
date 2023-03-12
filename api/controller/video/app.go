@@ -1,14 +1,21 @@
 package video
 
-func GetDouyin(id string) string {
+import (
+	"GoAPI/common"
+	"regexp"
+)
 
-	// redict_data := videoGET("https://v.douyin.com/"+id, nil)
-	// re := regexp.MustCompile(`[\d]+`)
-	// mid := re.FindString(redict_data.Header.Get("Location"))
+func GetDouyin(id string) common.Response {
 
-	// r := videoGET("https://www.iesdouyin.com/web/api/v2/aweme/iteminfo/?item_ids=6772455766503755022", nil)
-	// fmt.Println(helper.Json.Encode(r.Header))
-	// fmt.Println(r.Body)
+	redict_data := DouyinGET("https://v.douyin.com/"+id, nil)
+	re := regexp.MustCompile(`[\d]+`)
+	mid := re.FindString(redict_data.Header.Get("Location"))
 
-	return "result"
+	params := make(map[string]any)
+	params["aweme_id"] = mid
+
+	r := DouyinGET("https://www.douyin.com/aweme/v1/web/aweme/detail?aid=6383&version_code=19990127", params)
+	result := format_douyin(r.Body)
+
+	return result
 }

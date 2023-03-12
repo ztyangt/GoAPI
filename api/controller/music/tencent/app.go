@@ -1,10 +1,13 @@
 package tencent
 
 import (
+	"GoAPI/common"
+	"GoAPI/helper"
+
 	"github.com/tidwall/gjson"
 )
 
-func GetSong(id string) string {
+func GetSong(id string) common.Response {
 	params := make(map[string]any)
 	params["songmid"] = id
 	params["platform"] = "yqq"
@@ -15,7 +18,7 @@ func GetSong(id string) string {
 }
 
 // QQ音乐搜索接口失效
-// func Search(s string, type_ string, offset string, limit string) string {
+// func Search(s string, type_ string, offset string, limit string) common.Response {
 // params := make(map[string]any)
 // params["w"] = s
 // params["type"] = type_
@@ -27,7 +30,7 @@ func GetSong(id string) string {
 // 	return "{}"
 // }
 
-func GetUrl(id string) string {
+func GetUrl(id string) common.Response {
 	params := make(map[string]any)
 	params["songmid"] = id
 	params["platform"] = "yqq"
@@ -37,8 +40,8 @@ func GetUrl(id string) string {
 	return result
 }
 
-func GetComments(id string, limit string, offset string, ctype string) string {
-	topid := gjson.Get(GetSong(id), "id").String()
+func GetComments(id string, limit string, offset string, ctype string) common.Response {
+	topid := gjson.Get(helper.Json.Encode(GetSong(id).Data), "id").String()
 	params := make(map[string]any)
 	params["format"] = "json"
 	params["platform"] = "yqq.json"
@@ -52,7 +55,7 @@ func GetComments(id string, limit string, offset string, ctype string) string {
 	return result
 }
 
-func GetLyric(id string) string {
+func GetLyric(id string) any {
 	params := make(map[string]any)
 	params["songmid"] = id
 	params["format"] = "json"
@@ -60,10 +63,10 @@ func GetLyric(id string) string {
 	params["g_tk"] = "5381"
 	resp := musicGET("https://c.y.qq.com/lyric/fcgi-bin/fcg_query_lyric_new.fcg", params)
 	// result := FormatLyric(resp.Body)
-	return resp.Body
+	return helper.Json.Decode(resp.Body)
 }
 
-func GetList(id string) string {
+func GetList(id string) common.Response {
 	params := make(map[string]any)
 	params["id"] = id
 	params["format"] = "json"
@@ -74,7 +77,7 @@ func GetList(id string) string {
 	return result
 }
 
-func GetMV(id string) string {
+func GetMV(id string) common.Response {
 	params := make(map[string]any)
 	params["g_tk"] = "5381"
 	params["data"] = `{"getMvUrl":{"module":"gosrf.Stream.MvUrlProxy","method":"GetMvUrls","param":{"vids":["` + id + `"],"request_typet":10001}}}`
@@ -83,7 +86,7 @@ func GetMV(id string) string {
 	return result
 }
 
-// func GetUser(id string) string {
+// func GetUser(id string) common.Response {
 // 	resp := musicGET("https://music.163.com/api/v1/user/detail/"+id, nil)
 // 	result := FormatUser(resp.Body)
 // 	return result

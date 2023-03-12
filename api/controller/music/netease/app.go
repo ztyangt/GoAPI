@@ -1,14 +1,17 @@
 package netease
 
-func GetSong(id string) string {
+import (
+	"GoAPI/common"
+)
+
+func GetSong(id string) common.Response {
 	params := make(map[string]any)
 	params["c"] = `[{"id":` + id + `,"v":"0"}]`
 	resp := musicGET("https://music.163.com/api/v3/song/detail/", params)
-	result := FormatSong(resp.Body)
-	return result
+	return FormatSong(resp.Body)
 }
 
-func Search(s string, type_ string, offset string, limit string) string {
+func Search(s string, type_ string, offset string, limit string) common.Response {
 	params := make(map[string]any)
 	params["s"] = s
 	params["type"] = type_
@@ -19,7 +22,7 @@ func Search(s string, type_ string, offset string, limit string) string {
 	return result
 }
 
-func GetUrl(id string) string {
+func GetUrl(id string) common.Response {
 	params := make(map[string]any)
 	params["ids"] = "[" + id + "]"
 	params["br"] = 320000
@@ -28,7 +31,7 @@ func GetUrl(id string) string {
 	return result
 }
 
-func GetComments(id string, limit string, offset string, ctype string) string {
+func GetComments(id string, limit string, offset string, ctype string) common.Response {
 	params := make(map[string]any)
 	params["limit"] = limit
 	params["offset"] = offset
@@ -37,7 +40,7 @@ func GetComments(id string, limit string, offset string, ctype string) string {
 	return result
 }
 
-func GetLyric(id string) string {
+func GetLyric(id string) common.Response {
 	params := make(map[string]any)
 	params["id"] = id
 	params["lv"] = 1
@@ -48,7 +51,7 @@ func GetLyric(id string) string {
 	return result
 }
 
-func GetList(id string) string {
+func GetList(id string) common.Response {
 	params := make(map[string]any)
 	params["n"] = 1000
 	params["id"] = id
@@ -59,7 +62,7 @@ func GetList(id string) string {
 	return result
 }
 
-func GetMV(id string) string {
+func GetMV(id string) common.Response {
 	params := make(map[string]any)
 	params["id"] = id
 	resp := musicGET("https://music.163.com/api/mv/detail", params)
@@ -67,7 +70,7 @@ func GetMV(id string) string {
 	return result
 }
 
-func GetUser(id string) string {
+func GetUser(id string) common.Response {
 	resp := musicGET("https://music.163.com/api/v1/user/detail/"+id, nil)
 	result := FormatUser(resp.Body)
 	return result

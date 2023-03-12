@@ -10,6 +10,6 @@ func WordAPI(route *gin.RouterGroup) {
 	wordAPI := route.Group("word")
 	{
 		wordAPI.GET("/yiyan", word.YiyanFunc)
-		wordAPI.GET("/bogus", word.BogusFunc)
+		// wordAPI.GET("/bogus", word.BogusFunc)
 	}
 }

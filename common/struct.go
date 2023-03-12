@@ -51,3 +51,23 @@ type Comment struct {
 	Ip        string `json:"ip"`
 	Location  string `json:"location"`
 }
+
+type DouyinVideo struct {
+	Duration    int    `json:"duration"`
+	Cover       string `json:"cover"`
+	PlayUrl     string `json:"play_url"`
+	Description string `json:"description"`
+}
+
+type DouyinMusic struct {
+	Title   string `json:"title"`
+	Author  string `json:"author"`
+	PlayUrl string `json:"play_url"`
+}
+
+type DouyinInfo struct {
+	Video  any         `json:"video"`
+	Images any         `json:"images"`
+	Music  DouyinMusic `json:"music"`
+	Author Creator     `json:"author"`
+}

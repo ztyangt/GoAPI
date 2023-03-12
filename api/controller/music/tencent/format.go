@@ -2,7 +2,6 @@ package tencent
 
 import (
 	"GoAPI/common"
-	"GoAPI/helper"
 	"strconv"
 	"strings"
 	"time"
@@ -10,7 +9,7 @@ import (
 	"github.com/tidwall/gjson"
 )
 
-func FormatSong(data string) string {
+func FormatSong(data string) common.Response {
 
 	exist := gjson.Get(data, "data.0").Exists()
 
@@ -30,7 +29,7 @@ func FormatSong(data string) string {
 
 		pic_str := "https://y.gtimg.cn/music/photo_new/T002R800x800M000" + gjson.Get(data, "data.0.album.mid").String() + ".jpg"
 
-		return helper.Json.Encode(common.Song{
+		return common.ReturnData(200, common.Song{
 			Id:      id,
 			Name:    name,
 			Artist:  artist,
@@ -40,13 +39,13 @@ func FormatSong(data string) string {
 			LyricId: id,
 			MvId:    mv_id,
 			Source:  "tencent",
-		})
+		}, "请求成功")
 	} else {
-		return "{}"
+		return common.ReturnData(400, nil, "请求失败")
 	}
 }
 
-func FormatUrl(data string, id string) string {
+func FormatUrl(data string, id string) common.Response {
 
 	exist := gjson.Get(data, "data.0").Exists()
 
@@ -93,13 +92,13 @@ func FormatUrl(data string, id string) string {
 			return true
 		})
 
-		return helper.Json.Encode(result)
+		return common.ReturnData(200, result, "请求成功")
 	} else {
-		return "{}"
+		return common.ReturnData(400, nil, "请求失败")
 	}
 }
 
-func FormatComments(data string, ctype string) string {
+func FormatComments(data string, ctype string) common.Response {
 
 	var exist bool
 	var comments_str gjson.Result
@@ -130,13 +129,13 @@ func FormatComments(data string, ctype string) string {
 			return true
 		})
 
-		return helper.Json.Encode(comments)
+		return common.ReturnData(200, comments, "请求成功")
 	} else {
-		return "[]"
+		return common.ReturnData(400, nil, "请求失败")
 	}
 }
 
-func FormatList(data string) string {
+func FormatList(data string) common.Response {
 
 	list := gjson.Get(data, "data.cdlist.0")
 	exist := list.Exists()
@@ -191,20 +190,20 @@ func FormatList(data string) string {
 			return true
 		})
 
-		return helper.Json.Encode(common.List{
+		return common.ReturnData(200, common.List{
 			Creator:     creator,
 			Id:          id,
 			Name:        name,
 			Description: description,
 			CoverUrl:    cover_url,
 			PlayList:    play_list,
-		})
+		}, "请求成功")
 	} else {
-		return "{}"
+		return common.ReturnData(400, nil, "请求失败")
 	}
 }
 
-func FormatMV(data string, id string) string {
+func FormatMV(data string, id string) common.Response {
 	list := gjson.Get(data, "getMvUrl.data."+id+".mp4")
 	exist := list.Get("0").Exists()
 	if exist {
@@ -223,8 +222,8 @@ func FormatMV(data string, id string) string {
 
 		result.Url = url
 
-		return helper.Json.Encode(result)
+		return common.ReturnData(400, result, "请求成功")
 	} else {
-		return "{}"
+		return common.ReturnData(400, nil, "请求失败")
 	}
 }

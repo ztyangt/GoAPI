@@ -11,7 +11,7 @@ import (
 func InitServer(server *gin.Engine) {
 	server.LoadHTMLGlob("views/template/*")
 	server.StaticFS("static", http.Dir("views/assets"))
-	server.Use(favicon.New("views/assets/images/favicon.svg"))
+	server.Use(favicon.New("views/assets/images/favicon.ico"))
 
 	apiGroup := server.Group("api")
 	app.InitAPI(apiGroup)
