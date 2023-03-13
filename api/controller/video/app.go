@@ -11,10 +11,12 @@ func GetDouyin(id string) common.Response {
 	re := regexp.MustCompile(`[\d]+`)
 	mid := re.FindString(redict_data.Header.Get("Location"))
 
-	params := make(map[string]any)
-	params["aweme_id"] = mid
+	url := "https://www.douyin.com/aweme/v1/web/aweme/detail?aid=6383&version_code=19990127&aweme_id=" + mid
+	Xbogus := GetBogus(url)
 
-	r := DouyinGET("https://www.douyin.com/aweme/v1/web/aweme/detail?aid=6383&version_code=19990127", params)
+	new_url := url + "&X-Bogus=" + Xbogus
+
+	r := DouyinGET(new_url, nil)
 	result := format_douyin(r.Body)
 
 	return result

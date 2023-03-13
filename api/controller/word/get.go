@@ -14,8 +14,24 @@ func YiyanFunc(ctx *gin.Context) {
 }
 
 // func BogusFunc(ctx *gin.Context) {
-// 	url, _ := ctx.GetQuery("url")
-// 	agent, _ := ctx.GetQuery("agent")
-// 	data := GetBogus(url, agent)
-// 	ctx.JSON(http.StatusOK, data)
+// 	// curl, _ := ctx.GetQuery("url")
+// 	agent := ctx.Query("agent")
+
+// 	// decodedQuery, _ := url.QueryUnescape(agent)
+
+// 	// u, _ := url.Parse()
+// 	s, _ := url.QueryUnescape(ctx.Request.URL.String())
+// 	surl := strings.Replace(s, " ", "a", -1)
+
+// 	values, _ := url.ParseQuery(surl)
+// 	fmt.Println("------------------------------")
+// 	fmt.Println(surl)
+// 	fmt.Println(agent)
+// 	// fmt.Println(u.RawQuery)
+// 	fmt.Println(values)
+// 	// fmt.Println(u.RawQuery)
+// 	// fmt.Println(ctx.Request.URL.String())
+
+// 	// data := GetBogus(u.RawQuery, agent)
+// 	ctx.JSON(http.StatusOK, "data")
 // }
