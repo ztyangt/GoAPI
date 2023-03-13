@@ -11,8 +11,8 @@ func GetDouyin(id string) common.Response {
 	re := regexp.MustCompile(`[\d]+`)
 	mid := re.FindString(redict_data.Header.Get("Location"))
 
-	url := "https://www.douyin.com/aweme/v1/web/aweme/detail?aid=6383&version_code=19990127&aweme_id=" + mid
-	Xbogus := GetBogus(url)
+	url := "https://www.douyin.com/aweme/v1/web/aweme/detail?aweme_id=" + mid + "&aid=6383&version_code=19990127"
+	Xbogus := GetBogus("aweme_id=" + mid + "&aid=6383&version_code=19990127")
 
 	new_url := url + "&X-Bogus=" + Xbogus
 
