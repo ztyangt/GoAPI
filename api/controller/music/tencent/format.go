@@ -15,7 +15,7 @@ func FormatSong(data string) common.Response {
 
 	if exist {
 		var artist = []string{}
-		id := gjson.Get(data, "data.0.id").String()
+		id := gjson.Get(data, "data.0.mid").String()
 		name := gjson.Get(data, "data.0.name").String()
 
 		artist_str := gjson.Get(data, "data.0.singer")
@@ -179,7 +179,7 @@ func FormatList(data string) common.Response {
 				Name:    value.Get("name").String(),
 				Artist:  artist,
 				Album:   value.Get("album.name").String(),
-				PicUrl:  "",
+				PicUrl:  "https://y.gtimg.cn/music/photo_new/T002R800x800M000" + value.Get("album.mid").String() + ".jpg",
 				UrlId:   id,
 				LyricId: id,
 				MvId:    value.Get("mv.vid").String(),
@@ -196,7 +196,7 @@ func FormatList(data string) common.Response {
 			Name:        name,
 			Description: description,
 			CoverUrl:    cover_url,
-			PlayList:    play_list,
+			SongList:    play_list,
 		}, "请求成功")
 	} else {
 		return common.ReturnData(400, nil, "请求失败")

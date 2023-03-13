@@ -16,7 +16,6 @@ func init() {
 }
 
 func main() {
-	// Test()
 	// gin.SetMode(gin.ReleaseMode) //生产环境模式
 	server := gin.Default()
 	server.Use(cors.New(cors.Config{

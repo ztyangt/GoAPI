@@ -13,7 +13,7 @@ type List struct {
 	Name        string  `json:"name"`
 	Description string  `json:"description"`
 	CoverUrl    string  `json:"cover_url"`
-	PlayList    any     `json:"play_list"`
+	SongList    any     `json:"song_list"`
 }
 
 type Song struct {

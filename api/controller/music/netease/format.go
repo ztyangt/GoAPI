@@ -240,7 +240,7 @@ func FormatList(data string) common.Response {
 			Name:        name,
 			Description: description,
 			CoverUrl:    cover_url,
-			PlayList:    play_list,
+			SongList:    play_list,
 		}, "请求成功")
 	} else {
 		return common.ReturnData(400, nil, "请求失败")
