@@ -38,7 +38,7 @@ func FormatSong(data string) common.Response {
 		})
 
 		album := gjson.Get(data, "songs.0.al.name").String()
-		pic_str := gjson.Get(data, "songs.0.al.picUrl").String()
+		pic_str := gjson.Get(data, "songs.0.al.picUrl").String() + "?param=200y200"
 		mv_id := gjson.Get(data, "songs.0.mv").String()
 
 		return common.ReturnData(200, common.Song{
@@ -95,7 +95,7 @@ func FormatSearch(data string, type_ string) common.Response {
 					Name:    value.Get("name").String(),
 					Artist:  artist,
 					Album:   value.Get("al.name").String(),
-					PicUrl:  value.Get("al.PicUrl").String(),
+					PicUrl:  value.Get("al.PicUrl").String() + "?param=200y200",
 					UrlId:   id,
 					LyricId: id,
 					MvId:    value.Get("mv").String(),
@@ -223,7 +223,7 @@ func FormatList(data string) common.Response {
 				Name:    value.Get("name").String(),
 				Artist:  artist,
 				Album:   value.Get("al.name").String(),
-				PicUrl:  value.Get("al.picUrl").String(),
+				PicUrl:  value.Get("al.picUrl").String() + "?param=200y200",
 				UrlId:   id,
 				LyricId: id,
 				MvId:    value.Get("mv").String(),
